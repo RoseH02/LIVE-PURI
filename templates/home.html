@@ -1,1 +1,216 @@
-<h1>HOME TEMPLATE<h1>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home | Live Puri{% endblock %}
+
+{% block content %}
+{% load i18n %}
+
+<div class="background-shape">
+
+
+<section class="product-header">
+
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>We are here to make you feel good</h1>
+    </div>
+  </section>
+
+  </section>
+
+
+  <header class="video-hero">
+    <video autoplay muted loop playsinline>
+      <source src="{% static 'videos/lol.mp4' %}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="video-overlay-bottom-left">
+      <h1>Fuel Your Strength</h1>
+      <p>Pure Protein. Pure Energy. Pure You.</p>
+    </div>
+  </header>
+  
+
+
+  <div class="separator-quote">
+    <p>“Poudres de protéines pures, vitamines et minéraux purs
+        Les produits Live Puri® vous aident à soutenir votre sentiment de bien-être. Cela vous permettra de vous sentir bien dans la peau, tout au long de la journée. Nos produits sont tout à fait naturels, entièrement exempt d’éléments nuisibles.”</p>
+  </div>
+
+
+  <div class="custom-separator"></div>
+
+  
+  <section class="product-header">
+  <h2>Best Sellers</h2>
+</section>
+
+
+<div class="products-grid">
+  {% for product in best_sellers %}
+    <div class="product-card">
+    <a href="{% url 'product_detail' product.id %}">  
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <h3>{{ product.name }}</h3>
+      </a>
+      <p>{{ product.short_description }}</p>
+    </div>
+  {% endfor %}
+</div>
+
+<section class="home-category-buttons">
+    <a href="{% url 'protein' %}" class="category-button">View All Protein</a>
+    <a href="{% url 'vitamins' %}" class="category-button">View All Vitamins</a>
+    <a href="{% url 'collagen' %}" class="category-button">View All Collagens</a>
+    <a href="{% url 'meal_substitutes' %}" class="category-button">View All Meal Subs</a>
+  </section>
+  
+  <section class="newsletter-signup">
+    <img src="{% static 'images/photo1.jpeg' %}" alt="Newsletter Background" class="newsletter-image">
+    
+    <div class="newsletter-container">
+      <p class="newsletter-text">
+        Inscrivez-vous maintenant et recevez <strong>10% de réduction</strong> sur votre première commande !
+      </p>
+      <form class="newsletter-form">
+        <input type="text" name="voornaam" placeholder="Votre prénom" required>
+        <input type="email" name="email" placeholder="Votre e-mail" required>
+        <button type="submit">S'inscrire</button>
+      </form>
+    </div>
+  </section>
+  
+  
+
+
+  <section class="latest-recipes">
+    <h2>Latest Recipes</h2>
+    <div class="recipe-grid">
+      {% for recipe in latest_recipes %}
+      <div class="recipe-card">
+        <a href="{% url 'recipe_detail' recipe.id %}">
+            <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+          <div class="recipe-info">
+            <h3>{{ recipe.title }}</h3>
+            <p>{{ recipe.short_description }}</p>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="view-all-button">
+      <a href="{% url 'recipes' %}">View All Recipes</a>
+    </div>
+  </section>
+  
+  <div class="custom-separator"></div>
+
+
+
+  <section class="ambassador-carousel">
+    <h2>Ce que disent nos ambassadeurs</h2>
+    <div class="swiper ambassador-swiper">
+      <div class="swiper-wrapper">
+  
+        <!-- Slide Template -->
+        <div class="swiper-slide quote-slide">
+          <img class="ambassador-photo" src="{% static 'images/anouk.jpg' %}" alt="Anouk Goedegebuur" />
+          <p class="quote">"Live Puri est un produit que vous pensez et espérez qu'il est exactement : quelque chose qui enrichit votre vie de manière pure !"</p>
+          <p class="ambassador-name">Anouk Goedegebuur</p>
+          <p class="ambassador-title">Développeur de recettes et rédacteur</p>
+        </div>
+  
+        <div class="swiper-slide quote-slide">
+          <img class="ambassador-photo" src="{% static 'images/maartje.jpg' %}" alt="Maartje Paumen" />
+          <p class="quote">"Je connais beaucoup de produits, mais les vitamines et les protéines de Live Puri gardent mon corps bien équilibré."</p>
+          <p class="ambassador-name">Maartje Paumen</p>
+          <p class="ambassador-title">Championne du monde de hockey</p>
+        </div>
+  
+        <div class="swiper-slide quote-slide">
+          <img class="ambassador-photo" src="{% static 'images/kristan.jpg' %}" alt="Kristan van Hierden" />
+          <p class="quote">"Grâce à Live Puri je peux choisir des protéines sans ordure. Mes clients PT et moi-même en récupérons le meilleur !"</p>
+          <p class="ambassador-name">Kristan van Hierden</p>
+          <p class="ambassador-title">Championne du Monde de Tae Kwondo</p>
+        </div>
+  
+        <div class="swiper-slide quote-slide">
+          <img class="ambassador-photo" src="{% static 'images/mark.jpg' %}" alt="Mark Slats" />
+          <p class="quote">"La poudre de protéines et les conseils nutritionnels de Live Puri me soutiennent au quotidien pour établir un nouveau record du monde."</p>
+          <p class="ambassador-name">Mark Slats</p>
+          <p class="ambassador-title">Aventurier et rameur recordman</p>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+  
+  
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+    </div>
+  </section>
+
+
+
+  <div class="separator-quote">
+    <p>“Un corps sain commence avec des choix sains.”</p>
+  </div>
+  
+
+</div>
+
+ <!-- Swiper Carousel -->
+ <div class="swiper" style="width: 100%; height: 300px; margin-bottom: 30px; border-radius: 12px; overflow: hidden;">
+  <div class="swiper-wrapper">
+  
+
+    <!-- Slide 2 -->
+    <div class="swiper-slide" style="position: relative;">
+      <img src="{% static 'images/photo3.jpg' %}" alt="Slide 2" style="width: 100%; height: 100%; object-fit: cover;" />
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="swiper-slide" style="position: relative;">
+      <img src="{% static 'images/photo2.jpg' %}" alt="Slide 3" style="width: 100%; height: 100%; object-fit: cover;" />
+    </div>
+
+  </div>
+</div>
+
+  <!-- Video Section 
+  <section style="max-width: 900px; margin: 40px auto; padding: 0 15px;">
+    <h2>Watch How We Make Puri</h2>
+    <video controls style="width: 100%; border-radius: 8px;">
+      <source src="{% static 'videos/puri-video.mp4' %}" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </section>-->
+
+
+  
+
+  <script>
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      speed: 600,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
+
+
+  
+  
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="checkout-container">
+  <h1>Checkout</h1>
+
+  {% if products %}
+    <table class="checkout-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Subtotal (€)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in products %}
+        <tr>
+          <td>{{ item.product.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.subtotal }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <p class="total-amount"><strong>Total: {{ total }} €</strong></p>
+
+    <a href="{% url 'payment' %}" class="btn proceed-payment-btn">Proceed to Payment</a>
+  {% else %}
+    <p>Your cart is empty.</p>
+    <a href="{% url 'home' %}" class="btn btn-secondary">Continue Shopping</a>
+  {% endif %}
+</div>
+{% endblock %}

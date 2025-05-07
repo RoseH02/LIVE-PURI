@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="product-detail">
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image" />
+    
+    <div class="product-info">
+      <h1>{{ product.name }}</h1>
+      <p><strong>{{ product.price }} €</strong></p>
+      
+      <!-- Buttons to switch info -->
+      <div class="product-buttons">
+        <button class="btn" data-target="description">Description</button>
+        <button class="btn" data-target="ingredients">Ingredients</button>
+        <button class="btn" data-target="usage">Usage</button>
+        <button class="btn" data-target="reviews">Reviews</button>
+        <button class="btn" data-target="utilisation">Utilisation</button>
+      </div>
+
+
+
+  
+      <!-- Content sections -->
+      <div class="product-content">
+        <div id="description" class="content-section active">
+          <p>{{ product.description }}</p>
+        </div>
+        <div id="ingredients" class="content-section">
+            <p>{{ product.ingredients }}</p>
+        </div>
+        <div id="usage" class="content-section">
+            <p>{{ product.valeur_nutritive }}</p>
+        </div>
+        <div id="reviews" class="content-section">
+            <p>{{ product.reviews }}</p>
+        </div>
+        <div id="utilisation" class="content-section">
+            <p>{{ product.utilisation }}</p>
+        </div>
+      </div>
+  
+      <!-- Add to cart button -->
+      <form action="{% url 'add_to_cart' product.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+      </form>
+    </div>
+  </div>
+
+
+
+<script>
+        document.querySelectorAll('.product-buttons .btn').forEach(button => {
+          button.addEventListener('click', () => {
+            // Remove active from buttons
+            document.querySelectorAll('.product-buttons .btn').forEach(btn => btn.classList.remove('active'));
+            // Add active to clicked button
+            button.classList.add('active');
+      
+            const target = button.getAttribute('data-target');
+      
+            // Hide all content sections
+            document.querySelectorAll('.content-section').forEach(section => {
+              section.classList.remove('active');
+            });
+      
+            // Show selected content section
+            document.getElementById(target).classList.add('active');
+          });
+        });
+      
+        // Activate first button on page load
+        document.querySelector('.product-buttons .btn').click();
+    </script>
+    
+{% endblock %}

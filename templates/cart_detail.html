@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="cart-container">
+  <h1>Your Cart</h1>
+
+  {% if products %}
+    <ul class="cart-list">
+      {% for item in products %}
+        <li class="cart-item" data-product-id="{{ item.product.id }}">
+          <strong>{{ item.product.name }}</strong><br>
+          Quantity:
+          <input
+            type="number"
+            min="0"
+            value="{{ item.quantity }}"
+            class="quantity-input"
+            data-product-id="{{ item.product.id }}"
+          >
+          — Subtotal: <span id="subtotal-{{ item.product.id }}" class="item-subtotal">{{ item.subtotal }}</span> €
+        </li>
+      {% endfor %}
+    </ul>
+
+    <p class="cart-total"><strong>Total: <span id="cart-total">{{ total }}</span> €</strong></p>
+
+    <!-- No update button needed -->
+
+    <!-- Trash button to clear cart -->
+    <button id="empty-cart-btn" title="Empty cart">🗑️ Empty Cart</button>
+
+    <a href="{% url 'payment' %}" class="payment-btn">Proceed to Payment</a>
+
+  {% else %}
+    <p>Your cart is empty.</p>
+  {% endif %}
+
+  <a href="{% url 'home' %}" class="continue-shopping-btn">Continue Shopping</a>
+</div>
+
+<script>
+  const csrftoken = '{{ csrf_token }}';
+
+  // Function to update cart quantities via AJAX
+  function updateQuantity(productId, quantity) {
+    fetch("{% url 'update_cart' %}", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-CSRFToken': csrftoken,
+      },
+      body: new URLSearchParams({
+        ['quantities_' + productId]: quantity
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Update subtotal for this product
+      const subtotalEl = document.getElementById('subtotal-' + productId);
+      if (subtotalEl && data.subtotals && data.subtotals[productId]) {
+        subtotalEl.textContent = data.subtotals[productId];
+      }
+
+      // Update total
+      const totalEl = document.getElementById('cart-total');
+      if (totalEl && data.total) {
+        totalEl.textContent = data.total;
+      }
+
+      // Optionally remove item if quantity = 0
+      if (quantity == 0) {
+        const li = document.querySelector(`li.cart-item[data-product-id="${productId}"]`);
+        if (li) li.remove();
+      }
+
+      // If cart empty after removal, show empty message
+      if (data.total == 0) {
+        document.querySelector('.cart-container').innerHTML = '<p>Your cart is empty.</p>';
+      }
+    })
+    .catch(err => console.error('Error updating cart:', err));
+  }
+
+  // Attach change listeners on quantity inputs
+  document.querySelectorAll('.quantity-input').forEach(input => {
+    input.addEventListener('change', e => {
+      let productId = e.target.dataset.productId;
+      let quantity = e.target.value;
+      if (quantity < 0) quantity = 0; // sanitize negative
+      updateQuantity(productId, quantity);
+    });
+  });
+
+  // Empty cart button (optional)
+  document.getElementById('empty-cart-btn').addEventListener('click', () => {
+    fetch("{% url 'update_cart' %}", {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': csrftoken,
+      },
+      body: new URLSearchParams({
+        'empty_cart': '1'
+      })
+    }).then(() => {
+      location.reload();
+    });
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<section class="affiliate-section">
+    <h2>Affilié de Live Puri devenir ?</h2>
+    <p>Êtes-vous un tel fan de Live Puri comme nous-mêmes ? Inscrivez-vous ici pour devenir affilié de Live Puri devenir ! L'inscription se fait en une minute et nous vous contacterons toujours dans la journée. Notez également votre motivation, car nous aimerions vous connaître !</p>
+  
+    <h3>Pourquoi s'affilier à Live Puri ?</h3>
+    <ul>
+      <li>💰 Belle compensation pour vous</li>
+      <li>😊 Mille+ clients satisfaits</li>
+      <li>🌱 Produits purs et honnêtes qui contribuent à un monde plus sain</li>
+      <li>🌟 Avis Google sincères</li>
+      <li>🤝 Belle collaboration et attention personnelle</li>
+      <li>📊 Tableau de bord transparent avec vos revenus en temps réel</li>
+    </ul>
+  
+    <p>Inscrivez-vous rapidement ci-dessous en tant qu'affilié de Live Puri ! À bientôt !</p>
+    <p><strong>Cordialement, Maaike 🌱</strong></p>
+  
+    <div class="affiliate-forms">
+      <div class="form-box">
+        <h3>Créer un compte partenaire</h3>
+        <form method="POST">
+          {% csrf_token %}
+          <input type="text" name="full_name" placeholder="Votre nom" required>
+          <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+          <input type="email" name="email" placeholder="Compte email" required>
+          <input type="email" name="payment_email" placeholder="Email de paiement" required>
+          <input type="url" name="website" placeholder="URL de site Web" required>
+          <textarea name="promotion" placeholder="Comment allez-vous nous promouvoir ?" rows="4" required></textarea>
+          <label>
+            <input type="checkbox" name="terms" required>
+            Acceptez notre politique de confidentialité et nos termes et conditions
+          </label>
+          <button type="submit">S'inscrire</button>
+        </form>
+      </div>
+  
+      <div class="form-box">
+        <h3>Connectez-vous à votre compte</h3>
+        <form method="POST">
+          {% csrf_token %}
+          <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+          <input type="password" name="password" placeholder="Mot de passe" required>
+          <label>
+            <input type="checkbox" name="remember">
+            Se souvenir de moi
+          </label>
+          <button type="submit">Se connecter</button>
+          <p><a href="#">Vous avez oublié votre mot de passe ?</a></p>
+        </form>
+      </div>
+    </div>
+  </section>
+  
+  {% endblock %}

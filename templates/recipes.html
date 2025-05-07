@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="recipes-section">
+  <h1 class="recipes-title">Explore Our Favorite Recipes</h1>
+
+  <div class="recipes-grid">
+    {% for recipe in recipes %}
+    <div class="recipe-tile fade-in">
+      <a href="{% url 'recipe_detail' recipe.id %}">
+        <div class="recipe-image-container">
+          <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+        </div>
+        <div class="recipe-content">
+          <h3>{{ recipe.title }}</h3>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+<div class="custom-separator"></div>
+
+
+<script>
+  // IntersectionObserver for fade-in effect
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
+    });
+  }, {
+    threshold: 0.9
+  });
+
+  document.querySelectorAll('.fade-in').forEach(el => {
+    observer.observe(el);
+  });
+</script>
+
+{% endblock %}

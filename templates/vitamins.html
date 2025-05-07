@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="product-header">
+    <h1>Vitamines</h1>
+  </section>
+
+<section class="category-intro-with-image">
+    <div class="text-content">
+      <p>Nos vitamines sont formulées avec des ingrédients 100 % purs, soigneusement sélectionnés par nos pharmaciens expérimentés pour une absorption optimale.</p>
+  
+      <p>Que vous souhaitiez renforcer votre système immunitaire, améliorer votre énergie ou soutenir votre bien-être général, nos vitamines Live Puri vous offrent une qualité irréprochable sans compromis.</p>
+  
+      <p>Découvrez notre gamme complète pour une santé optimale au quotidien, avec un goût naturel et sans additifs inutiles.</p>
+    </div>
+    <div class="image-content">
+      <img src="{% static 'images/photo6.jpg' %}" alt="Vitamines Live Puri" />
+    </div>
+  </section>
+  
+  <section class="product-category">
+    <div class="product-category-title">
+    </div>
+  
+    <div class="products-grid">
+        {% for product in products %}
+          <div class="product-card">
+          <a href="{% url 'product_detail' product.id %}">  
+              <img src="{{ product.image.url }}" alt="{{ product.name }}">
+              <h3>{{ product.name }}</h3>
+            </a>
+            <p>{{ product.short_description }}</p>
+          </div>
+        {% endfor %}
+      </div>
+      
+</section>
+
+<div class="custom-separator"></div>
+
+
+
+  
+  
+{% endblock %}

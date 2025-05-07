@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<section class="product-header">
+    <h1> Meal Substitutes</h1>
+  </section>
+
+<section class="category-intro-with-image">
+    <div class="text-content">
+
+          
+      <p>Délicieux sans additifs car à base de lait frais (unique !) Satiété super longue durée grâce à la protéine de caséinate (plus de faim !)</p>
+      
+      <p>Réveil nocturne, emploi du temps rempli de réunions, stress lié aux études… Il existe de nombreuses « raisons » de sauter le petit-déjeuner ou de se laisser aller à un déjeuner malsain. Ces excuses peuvent maintenant aller trop loin ! Le Live Puri le substitut de repas à la vanille sans sucre est votre nouveau compagnon du petit-déjeuner ou du déjeuner. Une portion est pleine de fibres et de protéines et ne contient toujours que 128 calories !</p>
+      
+      <p>Un sac est bon pour dix déjeuners rapides ou petits déjeuners sains. Peut également être utilisé comme shake diététique en raison de sa composition saine en vitamines et minéraux. Idéal comme une variation dans un mode de vie sain et un shake prêt à l'emploi !</p>
+      
+      <p>Ce Live Puri Le substitut de repas à la vanille contient pas moins de 28 grammes de protéines par portion et tous les glucides, lipides, fibres, antioxydants, vitamines et minéraux pour permettre à votre corps de fonctionner de manière optimale.</p>
+      
+      <p>Il est légèrement sucré avec un édulcorant sans sucre, il convient donc également aux diabétiques et à tous ceux qui souhaitent surveiller leur consommation de sucre. Également disponible dans des emballages pratiques à emporter ou en forfait substitut de repas à la vanille ! Bonjour le jour de l'équilibre !</p>
+      
+      <ul>
+        <li>Sans sucres (raffinés) ou autres sucres ajoutés</li>
+        <li>Se dissout parfaitement (astuce : utilisez notre large RVS Live Puri shaker)</li>
+        <li>Délicieusement légèrement sucré avec un édulcorant à faible teneur en glucides</li>
+        <li>Parfait pour les shakes et la cuisson</li>
+        <li>Absorption rapide grâce à la protéine de lactosérum</li>
+        <li>Glucides, lactose et faible en gras</li>
+      </ul>
+    </div>
+    <div class="image-content">
+      <img src="{% static 'images/photo8.jpg' %}" alt="Substituts de repas Live Puri" />
+    </div>
+</section>
+
+  
+<section class="product-category">
+    <div class="product-category-title"></div>
+  
+    <div class="products-grid">
+        {% for product in products %}
+          <div class="product-card">
+          <a href="{% url 'product_detail' product.id %}">  
+              <img src="{{ product.image.url }}" alt="{{ product.name }}">
+              <h3>{{ product.name }}</h3>
+            </a>
+            <p>{{ product.short_description }}</p>
+          </div>
+        {% endfor %}
+      </div>
+      
+  </section>
+  
+
+  
+  
+{% endblock  %}

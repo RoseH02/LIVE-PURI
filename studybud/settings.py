@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from django.utils.translation import gettext_lazy as _
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,16 +42,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'base.apps.BaseConfig',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'studybud.urls'
@@ -119,8 +126,56 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'    # where your CSS, JS, images live during development
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+
+STRIPE_PUBLIC_KEY = 'pk_test_51RI5X3Gbf62QSKOeJQCesgv2O8zITMFcFBcBM735QwT1vrqgNJAuo3CnltYdFYkQjsNF9t0IkF6P1ZKqFQmEUCb000WOg6h2bI'
+STRIPE_SECRET_KEY = 'sk_test_51RI5X3Gbf62QSKOeisBshMCWsAgFAkbgwteWZgmhXAN5JwpFCkQwNWVUmkpLVkgcUv4AeS6BKp5nuuNIDaCskhJx00DItFH3W7'
+
+
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
+
+USE_I18N = True
+USE_L10N = True
+
+LANGUAGE_CODE = 'en'
+
+LANGUAGES = [
+    ('en', _('English')),
+    ('fr', _('French')),
+    ('nl', _('Dutch')),
+]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
+
+# settings.py
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.your-email-provider.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'your@email.com'
+EMAIL_HOST_PASSWORD = 'your_password'
+EMAIL_USE_TLS = True
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+CONTACT_EMAIL = 'where@youwant.com'

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="product-header">
+    <h1>Protein</h1>
+  </section>
+
+<section class="category-intro-with-image">
+    <div class="text-content">
+      <p>Les protéines sont essentielles au développement musculaire, à la récupération musculaire et à un corps sain. Que vous soyez un coureur débutant, un passionné de sport ou un quinquagénaire vital.</p>
+  
+      <p>Vous pouvez acheter les poudres de protéines les plus savoureuses et les meilleures à base de lait frais (uniques !) chez Live Puri, ainsi que des poudres de protéines végétales ! Nos poudres de protéines sont disponibles totalement non sucrées ou légèrement sucrées. Satiété longue durée et récupération rapide en un ! Elles sont parfaites pour une utilisation après l'entraînement et même pour la pâtisserie et la cuisine afin de préparer vos repas préférés riches en protéines. Idéal pour perdre du poids, développer et entretenir ses muscles et maintenir son poids !</p>
+  
+      <p>Grand fan ? Alors, nos packs de valeur sont parfaits pour toi ! Vous voulez d’abord goûter ? Alors commandez un sac d'échantillon de 25 grammes.</p>
+    </div>
+    <div class="image-content">
+      <img src="{% static 'images/photo5.jpg' %}" alt="Poudre de protéine Live Puri" />
+    </div>
+  </section>
+  
+
+
+
+
+  
+  
+  <section class="product-category">
+    <div class="product-category-title">
+    </div>
+  
+
+    <div class="products-grid">
+        {% for product in products %}
+          <div class="product-card">
+          <a href="{% url 'product_detail' product.id %}">  
+              <img src="{{ product.image.url }}" alt="{{ product.name }}">
+              <h3>{{ product.name }}</h3>
+            </a>
+            <p>{{ product.short_description }}</p>
+          </div>
+        {% endfor %}
+      </div>
+      
+
+</section>
+
+<div class="custom-separator"></div>
+
+
+  
+  
+{% endblock  %}

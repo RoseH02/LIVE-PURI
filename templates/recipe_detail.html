@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="recipe-detail-container">
+    <!-- Recipe Image -->
+    <div class="recipe-img-wrapper">
+        <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+    </div>
+
+    <!-- Recipe Info & Tabs -->
+    <div class="recipe-info">
+        <h1>{{ recipe.title|escape }}</h1>
+
+        <div class="recipe-buttons">
+            <button class="tab-btn active" data-target="description">Description</button>
+            <button class="tab-btn" data-target="ingredients">Ingredients</button>
+            <button class="tab-btn" data-target="preparation">Preparation</button>
+        </div>
+
+        <!-- Content Sections -->
+        <div class="recipe-sections">
+            <div id="description" class="tab-section active">
+                <p>{{ recipe.description|safe }}</p>
+            </div>
+            <div id="ingredients" class="tab-section">
+                <p>{{ recipe.ingredients|safe }}</p>
+            </div>
+            <div id="preparation" class="tab-section">
+                <p>{{ recipe.preparation|safe }}</p>
+            </div>
+        </div>
+
+        <!-- Back Link -->
+        <a href="{% url 'recipes' %}" class="back-link">← Back to all recipes</a>
+    </div>
+</div>
+
+
+
+
+      <script>
+        document.querySelectorAll('.tab-btn').forEach(button => {
+          button.addEventListener('click', () => {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-section').forEach(section => section.classList.remove('active'));
+      
+            button.classList.add('active');
+            const target = document.getElementById(button.dataset.target);
+            if (target) target.classList.add('active');
+          });
+        });
+      </script>
+      
+
+
+
+
+{% endblock %}

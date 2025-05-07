@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- SwiperJS CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <meta charset="UTF-8">
+    {% load static %}
+    <title>{% block title %}Live Puri{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles/static.css' %}">
+
+</head>
+
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+    <div class="language-switcher">
+    <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.path }}">
+        <select name="language" onchange="this.form.submit()">
+            <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
+            <option value="fr" {% if LANGUAGE_CODE == 'fr' %}selected{% endif %}>Français</option>
+            <option value="nl" {% if LANGUAGE_CODE == 'nl' %}selected{% endif %}>Nederlands</option>
+        </select>
+    </form>
+    </div>
+
+
+
+    
+    
+    
+    
+
+
+    <main>
+
+    <!-- Navbar -->
+<nav style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background-color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100;">
+
+
+    <!-- Logo -->
+<a href="/" class="logo-link">
+    <img src="{% static 'images/logo.jpg' %}" alt="Logo" class="logo">
+  </a>
+
+
+  
+    <!-- Links -->
+    <ul style="display: flex; list-style: none; gap: 2rem; margin: 0; padding: 0; align-items: center;">
+      <li><a href="{% url 'about' %}" style="text-decoration: none; color: #222;">About Us</a></li>
+
+    <ul style="display: flex; list-style: none; gap: 2rem; margin: 0; padding: 0; align-items: center;">
+        <li><a href="{% url 'protein' %}" style="text-decoration: none; color: #222;">Protein</a></li>
+
+    <ul style="display: flex; list-style: none; gap: 2rem; margin: 0; padding: 0; align-items: center;">
+          <li><a href="{% url 'vitamins' %}" style="text-decoration: none; color: #222;">Vitamines</a></li>
+
+    <ul style="display: flex; list-style: none; gap: 2rem; margin: 0; padding: 0; align-items: center;">
+            <li><a href="{% url 'collagen' %}" style="text-decoration: none; color: #222;">Collagene</a></li>
+  
+    <ul style="display: flex; list-style: none; gap: 2rem; margin: 0; padding: 0; align-items: center;">
+              <li><a href="{% url 'meal_substitutes' %}" style="text-decoration: none; color: #222;">Subsitut de repas</a></li>
+
+    <ul style="display: flex; list-style: none; gap: 2rem; margin: 0; padding: 0; align-items: center;">
+              <li><a href="{% url 'recipes' %}" style="text-decoration: none; color: #222;">Recipes</a></li>
+            </ul>
+          </nav>
+
+          
+      <!-- Dropdown 
+      
+
+      <li style="position: relative;">
+        <a href="#" style="text-decoration: none; color: #222;">Boutique ▾</a>
+        <ul style="display: none; position: absolute; top: 100%; left: 0; background-color: #fff; border: 1px solid #eee; padding: 0.5rem 0; list-style: none; box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 50;">
+          <li><a href="{% url 'protein' %}" style="display: block; padding: 0.5rem 1rem; text-decoration: none; color: #333;">Protein</a></li>
+          <li><a href="{% url 'vitamins' %}" style="display: block; padding: 0.5rem 1rem; text-decoration: none; color: #333;">Vitamins</a></li>
+          <li><a href="{% url 'meal_substitutes' %}" style="display: block; padding: 0.5rem 1rem; text-decoration: none; color: #333;">Meal Substitutes</a></li>
+          <li><a href="{% url 'collagen' %}" style="display: block; padding: 0.5rem 1rem; text-decoration: none; color: #333;">Collagen</a></li>
+          <li><a href="{% url 'accessories' %}" style="display: block; padding: 0.5rem 1rem; text-decoration: none; color: #333;">Accessories</a></li>
+        </ul>
+      </li>-->
+  
+
+
+
+  
+  <!-- JS to handle hover (optional for simplicity) -->
+  <script>
+    document.querySelectorAll('nav li').forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        const dropdown = item.querySelector('ul');
+        if (dropdown) dropdown.style.display = 'block';
+      });
+      item.addEventListener('mouseleave', () => {
+        const dropdown = item.querySelector('ul');
+        if (dropdown) dropdown.style.display = 'none';
+      });
+    });
+  </script>
+
+  
+
+  {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-section">
+          <h3>ABOUT</h3>
+          <ul>
+            <li><a href="{% url 'about' %}" >About us</a></li>
+            <li><a href="{% url 'affilie' %}">Affilié de Live Puri</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'livraison' %}">Livraison et retours</a></li>
+          </ul>
+        </div>
+      
+        <div class="footer-section">
+          <h3>PRODUCTS</h3>
+          <ul>
+            <li><a href="{% url 'collagen' %}">Collagene</a></li>
+            <li><a href="{% url 'protein' %}">Protein</a></li>
+            <li><a href="{% url 'meal_substitutes' %}">Meal subsitute</a></li>
+            <li><a href="{% url 'vitamins' %}">Vitamins</a></li>
+            <li><a href="{% url 'accessories' %}">Accessories</a></li>
+
+          </ul>
+        </div>
+      
+        <div class="footer-section">
+          <h3>REVIEWS</h3>
+          <p>Google Reviews<br><strong>4.9</strong> / 224 beoordelingen</p>
+      
+          <h3>FOLLOW US</h3>
+          <ul class="social-links">
+            <li><a href="https://www.facebook.com/livepuri/">Facebook</a></li>
+            <li><a href="https://www.instagram.com/livepuri/?hl=fr">Instagram</a></li>
+            <li><a href="https://www.tiktok.com/@live.puri">TikTok</a></li>
+          </ul>
+        </div>
+      </footer>
+      
+    
+
+    <footer>
+        <p>&copy; 2025 Live Puri</p>
+    </footer>
+</body>
+
+
+
+
+
+<!-- SwiperJS JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper('.swiper', {
+    loop: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+  });
+</script>
+
+
+
+
+
+</html>

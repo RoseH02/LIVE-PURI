@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+
+<!-- HEADER SECTION -->
+<section class="about-hero">
+  <div class="about-hero-content">
+    <h1>À propos de Live Puri®</h1>
+    <p>Notre mission est de vous faire vous aimer – dans un corps qui vous fait vous sentir bien. Avec des produits sains et purs qui bénéficient vraiment à votre corps, sans compromis sur le goût.</p>
+  </div>
+</section>
+
+<div class="Transition-section">
+</div>
+
+<!-- SCROLL CONTAINER START -->
+<div class="scroll-container">
+
+<!-- MISSION SECTION -->
+
+
+<section class="about-section">
+    <div class="image-content">
+      <img src="{% static 'images/photo11.jpg' %}" alt="Notre équipe" />
+  
+    </div>
+    <div class="text-content">
+        <h2>{% trans "Pourquoi choisir Live Puri® ?" %}</h2>
+  
+        <li>Compilé avec des pharmaciens expérimentés (20+ ans)</li>
+        <li>Goût pur et naturel</li>
+        <li>Excellentes critiques Google</li>
+        <li>100 % approuvé par l'EFSA</li>
+        <li>Sans charges, conservateurs ni gluten</li>
+        <li>Emballage recyclable</li>
+        <li>Expédition rapide (commandes avant 16h)</li>
+        <li>99% d'ingrédients locaux</li>
+        <li>Livraison gratuite à partir de 60€</li>
+  
+    </div>
+  </section>
+
+<!-- STORY SECTION -->
+<section class="about-section split reverse">
+  <div class="image-content">
+    <img src="{% static 'images/photo9.jpg' %}" alt="Notre équipe" style="width: 80%; max-width: 400px;" />
+
+  </div>
+  <div class="text-content">
+    <h2>Notre Histoire</h2>
+    <p>Je suis Maaike Godts. J'ai grandi en Belgique avec une alimentation saine faite maison. Après des années dans l’industrie alimentaire, j’ai créé Live Puri® en 2017 avec une vision : des produits sains, savoureux et 100% naturels.</p>
+    <p>Avec l’aide de pharmaciens, nous avons conçu des poudres de protéines et des vitamines pures, sans sucres inutiles, pour vous offrir la meilleure nutrition.</p>
+  </div>
+</section>
+
+<!-- TEAM SECTION -->
+<section class="about-section split">
+  <div class="text-content">
+    <h2>Notre Équipe</h2>
+    <p>Notre équipe est composée de pharmaciens, technologues alimentaires, experts en médias, employés de production et logisticiens. Ensemble, nous mettons tout notre cœur dans chaque étape de notre mission : rendre la santé accessible, pure et savoureuse.</p>
+  </div>
+  <div class="image-content">
+    <img src="{% static 'images/photo10.jpg' %}" alt="Notre équipe">
+  </div>
+</section>
+
+
+<div class="custom-separator"></div>
+
+</div>
+
+
+<!-- CONTACT SECTION -->
+<section class="about-contact centered">
+  <h2>Nous contacter</h2>
+  <p>Écrivez-nous à <a href="mailto:info@livepuri.nl">info@livepuri.nl</a> ou appelez le 06-48470205. Maaike vous répondra personnellement.</p>
+</section>
+
+
+
+{% endblock %}

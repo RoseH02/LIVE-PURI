@@ -179,3 +179,6 @@ EMAIL_USE_TLS = True
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 CONTACT_EMAIL = 'where@youwant.com'
+
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'

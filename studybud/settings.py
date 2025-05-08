@@ -31,8 +31,7 @@ SECRET_KEY = 'django-insecure-_d2%#(ut$c#xb_!9ua=@%m_h#*vfm_6bk*^q$&f54&p4ouysox
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.onrender.com']
-ALLOWED_HOSTS = ['my-django-test-auz9.onrender.com']
+
 ALLOWED_HOSTS = ['my-django-test-auz9.onrender.com', 'localhost', '127.0.0.1']
 
 

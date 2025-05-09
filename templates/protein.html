@@ -35,10 +35,10 @@
         {% for product in products %}
           <div class="product-card">
           <a href="{% url 'product_detail' product.id %}">  
-              <img src="{{ product.image.url }}" alt="{{ product.name }}">
-              <h3>{{ product.name }}</h3>
-            </a>
-            <p>{{ product.short_description }}</p>
+              <img src="{{ product.image.url }}">
+                <h3 class="product-name">{{ product.name }}</h3>
+              </a>
+            <p class="product-price"><strong>{{ product.price }} €</strong></p>
           </div>
         {% endfor %}
       </div>

@@ -1,2 +1,34 @@
 {% extends 'base.html' %}
 {% load static %}
+
+
+  
+{% block content %}
+
+
+<section class="product-category">
+    <div class="product-category-title">
+    </div>
+  
+
+    <div class="products-grid">
+        {% for product in products %}
+          <div class="product-card">
+          <a href="{% url 'product_detail' product.id %}">  
+              <img src="{{ product.image.url }}" alt="{{ product.name }}">
+              <h3>{{ product.name }}</h3>
+            </a>
+            <p><strong>{{ product.price }} €</strong></p>
+          </div>
+        {% endfor %}
+      </div>
+      
+
+</section>
+
+<div class="custom-separator"></div>
+
+
+  
+  
+{% endblock  %}

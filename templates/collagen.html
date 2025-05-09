@@ -1,2 +1,47 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block content %}
+
+
+<section class="product-header">
+    <h1>Collagen</h1>
+  </section>
+
+<section class="category-intro-with-image">
+    <div class="text-content">
+      <p>Shots de collagène de Live Puri contiennent 10.000 XNUMX mg d'hydrolysat de collagène de qualité supérieure breveté de type II, de vitamine C et de manganèse. La formule la plus qualitative et complète pour la peau, les cheveux et les ongles ainsi que les os, les articulations et les ligaments. Goûtez-les maintenant dans un approvisionnement mensuel pratique !</p>
+
+  
+    </div>
+    <div class="image-content">
+      <img src="{% static 'images/photo13.jpg' %}" alt="collagen Live Puri" />
+    </div>
+  </section>
+  
+
+
+
+<section class="product-category">
+    <div class="product-category-title">
+    </div>
+  
+
+    <div class="products-grid">
+        {% for product in products %}
+          <div class="product-card">
+          <a href="{% url 'product_detail' product.id %}">  
+              <img src="{{ product.image.url }}" alt="{{ product.name }}">
+              <h3>{{ product.name }}</h3>
+            </a>
+            <p><strong>{{ product.price }} €</strong></p>
+          </div>
+        {% endfor %}
+      </div>
+      
+
+</section>
+
+<div class="custom-separator"></div>
+
+{% endblock  %}

@@ -264,44 +264,9 @@ nav::after {
     font-size: 2rem;
   }
   
-  /* Product Card */
 
-.product-card h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin: 10px 0 5px;
-    color: #333;
-    }
-      
-.product-card p {
-    font-size: 0.95rem;
-    color: #666;
-    }
-  
-  .products-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    padding: 20px 0;
-  }
-  
-  .product-card {
-    width: 220px;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  }
-  
-  .product-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 5px;
-  }
-  
+
+
   
   /* Footer */
   footer {
@@ -440,7 +405,19 @@ nav::after {
     max-width: 1200px;
     margin: auto;
   }
-  
+
+
+  .product-card h3 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 10px 0 5px;
+    color: #333;
+    flex-grow: 1;
+    text-align: center;
+      }
+
+
+    
   .product-image {
     max-width: 400px;
     width: 100%;
@@ -474,6 +451,18 @@ nav::after {
     font-weight: bold;
     cursor: pointer;
   }
+  
+  .product-card p {
+    font-size: 0.95rem;
+    color: #666;
+    }
+  
+
+
+    
+ 
+  
+
   
 
 /*Cart*/
@@ -660,7 +649,17 @@ nav::after {
     color: red;
   }
 
+  
+
 /*PRODUCTS PAGES*/
+
+
+.product-card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
 
   .page-title {
     text-align: center;
@@ -677,14 +676,32 @@ nav::after {
     max-width: 1200px;
     margin: 0 auto;
   }
+
+
+  .product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
   
   .product-card {
     background: #fff;
+    width: 250px; /* or 300px if you want bigger */
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     overflow: hidden;
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 15px;
+    flex-grow: 0;
+  
   }
   
   .product-card:hover {
@@ -696,18 +713,23 @@ nav::after {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    text-align: center;
   }
   
   .product-name {
-    font-size: 1.5rem;
+    font-size: 0.5rem;
     margin: 15px 0 5px;
     color: #222;
+    margin-bottom: 10px;
+
   }
   
   .product-price {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: #0077cc;
     margin-bottom: 10px;
+    font-weight: bold;
+    margin-top: auto;
   }
   
   .product-description {
@@ -731,6 +753,11 @@ nav::after {
   .product-button:hover {
     background: #005fa3;
   }
+
+
+    
+  
+  
 
 
 /* FOOTER */
@@ -997,72 +1024,6 @@ nav::after {
 
 .about-contact a:hover {
     color: #f5a623; /* Accent color on hover */
-}
-
-  
-  
-
-  .product-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    object-fit: cover;
-}
-
-.product-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px; /* space between products */
-    justify-content: center; /* center the products */
-    margin-top: 30px;
-}
-
-.product-card {
-    width: 250px; /* or 300px if you want bigger */
-    background-color: #fff;
-    border: 1px solid #eee;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-}
-
-.product-card a {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-  }
-  
-
-.product-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
-
-.product-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-}
-
-.product-card .product-weight {
-    font-size: 0.9rem;
-    color: #777;
-    margin-bottom: 10px;
-}
-
-.product-card .product-price {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #333;
 }
 
   
@@ -1670,7 +1631,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
   }
   
   .category-button {
-    background: green
+    background: green;
     color: white;
     text-decoration: none;
     padding: 14px 26px;
@@ -1958,7 +1919,6 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
   }
   
 
-/*HOME PAGE */
 
 
 

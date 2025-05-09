@@ -3,12 +3,31 @@
 
 {% block content %}
 <div class="product-detail">
-    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image" />
+    <div class="product-image-container">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image" />
+    </div>
     
     <div class="product-info">
       <h1>{{ product.name }}</h1>
       <p><strong>{{ product.price }} €</strong></p>
       
+      <!-- Dropdown for selecting product variant -->
+      <div class="product-options">
+        <select id="pack-size" class="product-option">
+          <option value="" disabled selected>Select Pack Size</option>
+          {% for variant in product.variants.all %}
+            <option value="{{ variant.id }}">{{ variant.pack_size }}</option>
+          {% endfor %}
+        </select>
+        
+        <select id="flavor" class="product-option">
+          <option value="" disabled selected>Select Flavor</option>
+          {% for variant in product.variants.all %}
+            <option value="{{ variant.id }}">{{ variant.flavor }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
       <!-- Buttons to switch info -->
       <div class="product-buttons">
         <button class="btn" data-target="description">Description</button>
@@ -18,9 +37,6 @@
         <button class="btn" data-target="utilisation">Utilisation</button>
       </div>
 
-
-
-  
       <!-- Content sections -->
       <div class="product-content">
         <div id="description" class="content-section active">
@@ -39,39 +55,72 @@
             <p>{{ product.utilisation }}</p>
         </div>
       </div>
-  
+
       <!-- Add to cart button -->
       <form action="{% url 'add_to_cart' product.id %}" method="post">
         {% csrf_token %}
         <button type="submit" class="add-to-cart-btn">Add to Cart</button>
       </form>
     </div>
-  </div>
-
-
+</div>
 
 <script>
-        document.querySelectorAll('.product-buttons .btn').forEach(button => {
-          button.addEventListener('click', () => {
-            // Remove active from buttons
-            document.querySelectorAll('.product-buttons .btn').forEach(btn => btn.classList.remove('active'));
-            // Add active to clicked button
-            button.classList.add('active');
-      
-            const target = button.getAttribute('data-target');
-      
-            // Hide all content sections
-            document.querySelectorAll('.content-section').forEach(section => {
-              section.classList.remove('active');
-            });
-      
-            // Show selected content section
-            document.getElementById(target).classList.add('active');
-          });
-        });
-      
-        // Activate first button on page load
-        document.querySelector('.product-buttons .btn').click();
-    </script>
-    
+  document.querySelectorAll('.product-buttons .btn').forEach(button => {
+    button.addEventListener('click', () => {
+      // Remove active from buttons
+      document.querySelectorAll('.product-buttons .btn').forEach(btn => btn.classList.remove('active'));
+      // Add active to clicked button
+      button.classList.add('active');
+
+      const target = button.getAttribute('data-target');
+
+      // Hide all content sections
+      document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.remove('active');
+      });
+
+      // Show selected content section
+      document.getElementById(target).classList.add('active');
+    });
+  });
+
+  // Activate first button on page load
+  document.querySelector('.product-buttons .btn').click();
+
+  // Handle pack size and flavor change
+  const packSizeSelect = document.getElementById('pack-size');
+  const flavorSelect = document.getElementById('flavor');
+
+  packSizeSelect.addEventListener('change', () => {
+    updatePrice();
+  });
+
+  flavorSelect.addEventListener('change', () => {
+    updatePrice();
+  });
+
+  function updatePrice() {
+    const selectedPackSize = packSizeSelect.value;
+    const selectedFlavor = flavorSelect.value;
+
+    // Here, you can use AJAX or some other method to dynamically get the price from the database
+    // For now, this is just a placeholder for how you can change the price dynamically.
+    const price = document.querySelector('.product-info p strong'); 
+    if (selectedPackSize && selectedFlavor) {
+      // Example: Change price based on variant selection
+      // Get the price from the corresponding variant
+      const variant = getProductVariant(selectedPackSize, selectedFlavor);
+      price.innerText = `${variant.price} €`; // Set new price dynamically
+    }
+  }
+
+  // Placeholder function for retrieving the correct variant based on pack size and flavor
+  function getProductVariant(packSizeId, flavorId) {
+    // Logic to get variant by IDs, e.g., AJAX request or data attributes
+    return {
+      price: 29.99, // Example: variant price
+    };
+  }
+</script>
+
 {% endblock %}
